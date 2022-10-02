@@ -1,6 +1,3 @@
-from cgi import print_form
-from re import T
-from shutil import ExecError
 from bs4 import BeautifulSoup
 import requests as re
 
@@ -23,18 +20,17 @@ soup = BeautifulSoup(page.content, 'html.parser')
 # None
 # ou seja, há 4 parágrafos ditos por ele
 
-pessoas = ['Ciro', "Felipe", 'Jair', 'Luiz',
-           'Padre', 'Simone', 'Soraya', 'William']
-
+pessoas = ['ciro', 'felipe', 'jair', 'luiz',
+           'padre', 'simone', 'soraya', 'william']
 
 def retorna_falas_por_pessoa(nome, soup):
-    comeco = 5 if nome == 'Luiz' else 2
+    comeco = 5 if nome.capitalize() == 'Luiz' else 2
     paragrafos = soup.find_all('p')
     falas = []
     j = 0
     for i in range(len(paragrafos)):
         try:
-            if (nome in paragrafos[i].find('strong').text):
+            if (nome.capitalize() in paragrafos[i].find('strong').text):
                 falas.append(' '.join(paragrafos[i].text.split()[comeco:]))
                 for j in range(i + 1, len(paragrafos)):
                     if (paragrafos[j].find('strong') == None):
