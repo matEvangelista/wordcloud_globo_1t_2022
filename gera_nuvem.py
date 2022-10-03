@@ -32,7 +32,7 @@ while(continuar):
     
     horizontal = False
     while (True):
-        display = input('Digite v para wordcloud na vertical e h para horizontal: ').upper()
+        display = input('Digite v para wordcloud na vertical e h para horizontal: ')
         if display.lower() == 'h':
             horizontal = True
             break
