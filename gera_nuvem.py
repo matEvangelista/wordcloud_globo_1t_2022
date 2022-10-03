@@ -29,17 +29,32 @@ while(continuar):
                 active = False    
         else:
             print("Voce ja criou um arquivo com esse nome.\n")
+    
+    horizontal = False
+    while (True):
+        display = input('Digite v para wordcloud na vertical e h para horizontal: ').upper()
+        if display.lower() == 'h':
+            horizontal = True
+            break
+        elif display.lower() == 'v':
+            break
+        else:
+            print("Digite corretamente")
 
-    text = open(f'{candidato}.txt', mode='r', encoding='utf-8').read()
+    text = open('textos/'f'{candidato}.txt', mode='r', encoding='utf-8').read()
 
     nltk.download('stopwords')
     stopwords = nltk.corpus.stopwords.words('portuguese')
 
+    dimensoes = [800, 1200]
+    if (horizontal):
+        dimensoes[0], dimensoes[1] = dimensoes[1], dimensoes[0]
+
     wc = WordCloud(
         background_color = 'white',
         stopwords = stopwords,
-        width = 400,
-        height=600
+        width = dimensoes[0],
+        height= dimensoes[1]
     )
 
     wc.generate(text)
